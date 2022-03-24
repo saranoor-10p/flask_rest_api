@@ -4,8 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
 api=Api(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/books_inventory'
-#app.config['SQLALCHEMY_DATABASE_URI']="postgresql:///books_database"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/librarybooks'
 db=SQLAlchemy(app)
 
 class BookModel(db.Model):
@@ -16,7 +15,7 @@ class BookModel(db.Model):
     def __repr__(self):
         return f"Books(name={name}, authorname = {authorname})"
 
-#db.create_all()
+db.create_all()
 
 books_put_args=reqparse.RequestParser()
 books_put_args.add_argument("name", type=str, help="Name of books")
@@ -83,7 +82,6 @@ class Books(Resource):
         return '',204
 
 api.add_resource(Books,"/books/<int:book_id>")
-#flask_restful.Api.add_resource():
 
 if __name__ == "__main__":
     app.run(debug=True)
