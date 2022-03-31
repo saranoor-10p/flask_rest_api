@@ -17,6 +17,11 @@ This flask rest api perform CURD operation in postgresql database.
 3. configure database in flask app
 `app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<username>:<password>@localhost:5432/<database-name>'`
 
+4. In the terminal type 
+    - `set -a`
+    - `source config.env`
+    - `set +a`
+    
 4. Run python main.py with `db.create_all()` 
 
 5. Run pytest 
