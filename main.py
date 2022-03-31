@@ -22,9 +22,9 @@ class BookModel(db.Model):
 
 db.create_all()
 
-books_put_args=reqparse.RequestParser()
-books_put_args.add_argument("name", type=str, help="Name of books")
-books_put_args.add_argument("authorname", type=str, help="Name of Writer")
+books_post_args=reqparse.RequestParser()
+books_post_args.add_argument("name", type=str, help="Name of books")
+books_post_args.add_argument("authorname", type=str, help="Name of Writer")
 
 books_patch_args=reqparse.RequestParser()
 books_patch_args.add_argument("name", type=str, help="Name of books")
@@ -44,8 +44,8 @@ class Books(Resource):
         return result
 
     @marshal_with(resource_fields)
-    def put(self, book_id):
-        args=books_put_args.parse_args()
+    def post(self, book_id):
+        args=books_post_args.parse_args()
         result = BookModel.query.filter_by(id=book_id).first()
 
         if result: 

@@ -19,8 +19,8 @@ def bookdata():
     ('2', {'id':2,'authorname': 'Khaled HUssaini', 'name': 'Kite Runner'}),
     ('3', {'id':3,'authorname': 'Mohsin Hamid', 'name': 'Exit West'}),
 ])
-def test_put_book_data(book_id,bookdata,output):
-    response=requests.put(BASE + "books/"+str(book_id), bookdata[book_id])
+def test_post_book_data(book_id,bookdata,output):
+    response=requests.post(BASE + "books/"+str(book_id), bookdata[book_id])
     assert response.json() == output
 
 @pytest.mark.parametrize("book_id,output", [
