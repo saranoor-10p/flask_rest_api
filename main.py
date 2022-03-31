@@ -1,10 +1,15 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app=Flask(__name__)
 api=Api(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/librarybooks'
+user=os.environ.get('USER')
+password=os.environ.get('PASSWORD')
+host=os.environ.get('HOST')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://'+user+':'+password+'@'+host+':5432/librarybooks'
 db=SQLAlchemy(app)
 
 class BookModel(db.Model):
@@ -30,7 +35,6 @@ resource_fields= {
     'name' : fields.String,
     'authorname' : fields.String
 }
-
 class Books(Resource):
     @marshal_with(resource_fields)
     def get(self, book_id):
